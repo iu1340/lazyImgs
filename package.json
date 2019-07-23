@@ -1,0 +1,23 @@
+{
+  "name": "lazyimgs",
+  "version": "1.0.0",
+  "description": "Lazy loading of images in DOM",
+  "main": "lazyImgs.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iu1340/lazyImgs.git"
+  },
+  "keywords": [
+    "lazy load",
+    "vue"
+  ],
+  "author": "iu1340",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/iu1340/lazyImgs/issues"
+  },
+  "homepage": "https://github.com/iu1340/lazyImgs#readme"
+}
