@@ -3,7 +3,7 @@
 # USE
 ```
 // main.js
-import LazyImgs from 'lazyimgs'
+import LazyImgs from 'vue-lazy-imgs-dom'
 
 Vue.use(LazyImgs)
 
