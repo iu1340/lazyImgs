@@ -56,7 +56,8 @@ function lazyLoad(img, src, parent) {
     let imgIndex = img.getAttribute('img-index');
     let status = img.getAttribute('status');
     if (!imgIndex) {
-        imgIndex = '' + new Date().getTime() + Math.random() * 100;
+        imgIndex = '' + Math.floor(new Date().getTime() + Math.random() * 100);
+        img.setAttribute('img-index', imgIndex);
     }
     if (status === 'loading') {
         debounce(imgIndex, function () {
@@ -84,14 +85,14 @@ export default {
                 let parentName = el.getAttribute('parent');
                 let parent = document.querySelector(parentName);
 
-                if(parent){
+                if (parent) {
                     //parent = el.parentNode;
                     parent.addEventListener('scroll', () => {
                         lazyLoad(el, binding.value, parent);
                     });
                 }
-                
-                
+
+
                 window.addEventListener('scroll', function () {
                     lazyLoad(el, binding.value, parent);
                 }, true);
