@@ -1,5 +1,5 @@
 {
-  "name": "vue-lazy-imgs",
+  "name": "lazyimgs",
   "version": "1.2.2",
   "description": "Lazy loading of images in DOM",
   "main": "lazyImgs.js",
