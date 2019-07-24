@@ -47,6 +47,16 @@ function isVisible(el, parent) {
 }
 
 /**
+ * 生成唯一ID
+ */
+function guid() {
+    function S4() {
+       return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
+    }
+    return (S4()+S4()+"-"+S4()+"-"+S4()+"-"+S4()+"-"+S4()+S4()+S4());
+}
+
+/**
  * 对图片进行懒加载
  * @param {element} img
  * @param {string} src
@@ -56,7 +66,7 @@ function lazyLoad(img, src, parent) {
     let imgIndex = img.getAttribute('img-index');
     let status = img.getAttribute('status');
     if (!imgIndex) {
-        imgIndex = '' + Math.floor(new Date().getTime() + Math.random() * 100);
+        imgIndex = guid();
         img.setAttribute('img-index', imgIndex);
     }
     if (status === 'loading') {
