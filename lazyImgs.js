@@ -33,7 +33,6 @@ function isVisible(el, parent) {
     return false
     **/
     let position = el.getBoundingClientRect();
-    let parentPosition = parent.getBoundingClientRect();
     // console.log(parentPosition)
     // let half = position.width / 2;
     if (!parent) {
@@ -41,6 +40,7 @@ function isVisible(el, parent) {
         return (position.top < parent.innerHeight && position.bottom > 0) &&
             (position.left < parent.innerWidth && position.right > 0);
     } else {
+        let parentPosition = parent.getBoundingClientRect();
         return (position.top < parentPosition.bottom && position.top >= parentPosition.top) &&
             (position.left < (parentPosition.right) && position.left >= parentPosition.left);
     }
@@ -77,25 +77,26 @@ export default {
                 }
                 el.setAttribute('data-src', binding.value);
                 el.setAttribute('status', 'loading');
-
-                let parentName = el.getAttribute('parent');
-                let parent = document.querySelector(parentName);
-                // if(!parentName){
-                //     parent = el.parentNode;
-                // }
-                
-                parent.addEventListener('scroll', () => {
-                    lazyLoad(el, binding.value, parent);
-                });
-                window.addEventListener('scroll', function () {
-                    lazyLoad(el, binding.value, parent);
-                }, true);
-
                 // 监听element，现用update替换
                 // observer.observe(el, { attributes : true, attributeFilter : ['style'] });
             },
             inserted: function (el, binding, vnode) {
-                lazyLoad(el);
+                let parentName = el.getAttribute('parent');
+                let parent = document.querySelector(parentName);
+
+                if(parent){
+                    //parent = el.parentNode;
+                    parent.addEventListener('scroll', () => {
+                        lazyLoad(el, binding.value, parent);
+                    });
+                }
+                
+                
+                window.addEventListener('scroll', function () {
+                    lazyLoad(el, binding.value, parent);
+                }, true);
+
+                // lazyLoad(el);
             },
             update: function (el, binding, vnode) {
                 let parentName = el.getAttribute('parent');
