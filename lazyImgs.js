@@ -23,26 +23,15 @@ function debounce(index, fn) {
  * @return boolean
  */
 function isVisible(el, parent) {
-    /**
-    let windowHeight = window.innerHeight
-    let position = el.getBoundingClientRect()
-    // 当元素的top偏移量小于页面大小并且大于高度的负数
-    if(position.top<windowHeight && position.top>-position.height){
-      return true
-    }
-    return false
-    **/
     let position = el.getBoundingClientRect();
-    // console.log(parentPosition)
-    // let half = position.width / 2;
     if (!parent) {
         parent = window;
         return (position.top < parent.innerHeight && position.bottom > 0) &&
             (position.left < parent.innerWidth && position.right > 0);
     } else {
         let parentPosition = parent.getBoundingClientRect();
-        return (position.top < parentPosition.bottom && position.top >= parentPosition.top) &&
-            (position.left < (parentPosition.right) && position.left >= parentPosition.left);
+        return ((position.top < parentPosition.bottom && position.top >= parentPosition.top)||(position.bottom < parentPosition.bottom && position.bottom >= parentPosition.top)) &&
+            ((position.left < (parentPosition.right) && position.left >= parentPosition.left)||(position.right < (parentPosition.right) && position.right >= parentPosition.left));
     }
 }
 
@@ -107,7 +96,7 @@ export default {
                     lazyLoad(el, binding.value, parent);
                 }, true);
 
-                // lazyLoad(el);
+                lazyLoad(el, binding.value, parent);
             },
             update: function (el, binding, vnode) {
                 let parentName = el.getAttribute('parent');
